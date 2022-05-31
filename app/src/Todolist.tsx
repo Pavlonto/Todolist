@@ -3,6 +3,8 @@ import {FilterValueType} from "./App";
 import './App.css';
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
+import {Button, Checkbox, IconButton} from "@mui/material";
+import {Delete} from "@mui/icons-material";
 
 export type TaskType = {
     id: string
@@ -56,29 +58,30 @@ export function Todolist(props: PropsType) {
         }
 
         return <li key={t.id}>
-            <input type="checkbox" onChange={onChangeStatusHandler} checked={t.isDone}/>
+            <Checkbox onChange={onChangeStatusHandler} checked={t.isDone}/>
             <EditableSpan title={t.title} className={t.isDone ? "is-done" : ""}
                           onChange={onChangeTitleHandler}/>
-            <button onClick={onClickHandler}>x</button>
+            <IconButton onClick={onClickHandler}><Delete/></IconButton>
+
         </li>
     })
 
     return (
-        <div>
+        <div className={"Todolist"}>
             <h3> <EditableSpan title={props.title} onChange={changeTodolistTitle}/>
-                <button onClick={removeTodolist}>x</button>
+                <IconButton onClick={removeTodolist}><Delete/></IconButton>
             </h3>
             <AddItemForm addItem={addTask}/>
             <ul>{mappedTasks}</ul>
             <div>
-                <button className={props.filter === "all" ? "active-filter" : ""} onClick={onAllClickHandler}>All
-                </button>
-                <button className={props.filter === "active" ? "active-filter" : ""}
+                <Button variant={props.filter === "all" ? "contained" : "text"} onClick={onAllClickHandler}>All
+                </Button>
+                <Button variant={props.filter === "active" ? "contained" : "text"}
                         onClick={onActiveClickHandler}>Active
-                </button>
-                <button className={props.filter === "completed" ? "active-filter" : ""}
+                </Button>
+                <Button variant={props.filter === "completed" ? "contained" : "text"}
                         onClick={onCompletedClickHandler}>Completed
-                </button>
+                </Button>
             </div>
         </div>
     )
