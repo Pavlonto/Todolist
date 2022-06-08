@@ -5,7 +5,7 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 
-type TodolistType = {
+export type TodolistType = {
     id: string
     title: string
     filter: FilterValueType
@@ -55,7 +55,6 @@ function App() {
     function changeFilter(value: FilterValueType, todolistId: string) {
         let todolist = todolists.map(tl => tl.id === todolistId ? {...tl, filter: value} : tl)
         setTodolists(todolist)
-        // setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: value} : tl))
     }
 
     function changeStatus(taskId: string, isDone: boolean, todolistId: string) {
